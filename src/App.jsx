@@ -10,13 +10,16 @@ function App() {
   function handleAddToCart(product) {
     setCartItems([...cartItems, product]);
   }
+  function handleRemoveFromCart(index) {
+  setCartItems(cartItems.filter((_, i) => i !== index));
+}
 
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} onRemove={handleRemoveFromCart} />} />
       </Routes>
     </BrowserRouter>
   );
