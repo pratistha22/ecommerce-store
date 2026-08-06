@@ -1,16 +1,29 @@
-# React + Vite
+# MyStore — React E-Commerce Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack-style e-commerce storefront built with React, React Router, and Vite. Users can browse products, add them to a cart, and see a running total — with routing between Home and Cart pages and state managed via React hooks.
 
-Currently, two official plugins are available:
+## Features
+- Product listing with cards (name, price, image, add-to-cart)
+- Shopping cart with live total calculation
+- Client-side routing (Home / Cart) with React Router
+- Component-based architecture (Navbar, ProductCard, pages)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- React
+- React Router
+- Vite
+- JavaScript (ES6+)
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+npm install
+npm run dev
 
-## Expanding the ESLint configuration
+## Roadmap
+- Product detail pages
+- Remove/update quantity in cart
+- Checkout flow
+- Real product images and improved styling
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+Built by Pratistha Koirala
