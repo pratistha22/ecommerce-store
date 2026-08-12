@@ -2,7 +2,7 @@ import { useState } from "react";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
 
-function Home({ onAddToCart }) {
+function Home({ onAddToCart, wishlist, onToggleWishlist }) {
   const [search, setSearch] = useState("");
 
   const filteredProducts = products.filter((p) =>
@@ -35,8 +35,14 @@ function Home({ onAddToCart }) {
         marginTop: "20px",
       }}>
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
-        ))}
+  <ProductCard
+    key={product.id}
+    product={product}
+    onAddToCart={onAddToCart}
+    onToggleWishlist={onToggleWishlist}
+    isWishlisted={wishlist.some((item) => item.id === product.id)}
+  />
+))}
       </div>
     </div>
   );

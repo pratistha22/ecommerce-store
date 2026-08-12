@@ -10,8 +10,22 @@ function Checkout({ cartItems, onOrderComplete }) {
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  function handlePlaceOrder(e) {
+ function handlePlaceOrder(e) {
     e.preventDefault();
+
+    const newOrder = {
+      id: Date.now(),
+      name,
+      address,
+      phone,
+      items: cartItems,
+      total,
+      date: new Date().toLocaleString(),
+    };
+
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    localStorage.setItem("orders", JSON.stringify([...existingOrders, newOrder]));
+
     setOrderPlaced(true);
     onOrderComplete();
   }

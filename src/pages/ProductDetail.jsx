@@ -14,6 +14,9 @@ function ProductDetail({ onAddToCart }) {
     );
   }
 
+  const whatsappMessage = "Hi! I'd like to order: " + product.name + " (Rs. " + product.price + ")";
+  const whatsappUrl = "https://wa.me/9779811073733?text=" + encodeURIComponent(whatsappMessage);
+
   return (
     <div style={{ padding: "32px", maxWidth: "900px", margin: "0 auto" }}>
       <Link to="/" style={{ color: "#e75480" }}>← Back to shop</Link>
@@ -42,6 +45,25 @@ function ProductDetail({ onAddToCart }) {
           >
             Add to Cart
           </button>
+
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-block",
+              marginTop: "12px",
+              marginLeft: "12px",
+              backgroundColor: "#25D366",
+              color: "white",
+              padding: "12px 24px",
+              borderRadius: "6px",
+              textDecoration: "none",
+              fontSize: "15px",
+            }}
+          >
+            Order via WhatsApp
+          </a>
         </div>
       </div>
     </div>

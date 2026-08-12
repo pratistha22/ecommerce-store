@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-function ProductCard({ product, onAddToCart }) {
+function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }) {
   const [added, setAdded] = useState(false);
 
   function handleClick() {
@@ -32,6 +32,18 @@ onMouseLeave={(e) => {
   <h3 style={{ fontSize: "16px", margin: "12px 0 4px" }}>{product.name}</h3>
 </Link>
       <p style={{ color: "#555", fontSize: "14px" }}>Rs. {product.price}</p>
+      <button
+  onClick={() => onToggleWishlist(product)}
+  style={{
+    background: "none",
+    border: "none",
+    fontSize: "20px",
+    cursor: "pointer",
+    marginBottom: "8px",
+  }}
+>
+  {isWishlisted ? "❤️" : "🤍"}
+</button>
       <button
   onClick={handleClick}
   style={{

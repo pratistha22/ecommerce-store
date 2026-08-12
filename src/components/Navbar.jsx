@@ -14,6 +14,8 @@ flexWrap: "wrap",
       <h2 style={{ margin: 0 }}>MyStore</h2>
       <div style={{ display: "flex", gap: "24px" }}>
         <Link to="/" style={{ color: "white", textDecoration: "none" }}>Home</Link>
+        <Link to="/wishlist" style={{ color: "white", textDecoration: "none" }}>Wishlist</Link>
+        <Link to="/orders" style={{ color: "white", textDecoration: "none" }}>Orders</Link>
         <Link to="/cart" style={{ color: "white", textDecoration: "none", position: "relative" }}>
   Cart
   {cartCount > 0 && (
