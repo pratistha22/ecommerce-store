@@ -14,6 +14,7 @@ function ProductDetail({ onAddToCart }) {
     );
   }
 
+  const relatedProducts = products.filter((p) => p.id !== product.id).slice(0, 3);
   const whatsappMessage = "Hi! I'd like to order: " + product.name + " (Rs. " + product.price + ")";
   const whatsappUrl = "https://wa.me/9779811073733?text=" + encodeURIComponent(whatsappMessage);
 
@@ -64,6 +65,21 @@ function ProductDetail({ onAddToCart }) {
           >
             Order via WhatsApp
           </a>
+        </div>
+      </div>
+
+      <div style={{ marginTop: "48px" }}>
+        <h2 style={{ color: "#e75480", fontSize: "20px", marginBottom: "16px" }}>You might also like</h2>
+        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+          {relatedProducts.map((p) => (
+            <Link key={p.id} to={`/product/${p.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+              <div style={{ width: "180px" }}>
+                <img src={p.image} alt={p.name} style={{ width: "100%", borderRadius: "8px" }} />
+                <p style={{ fontSize: "14px", marginTop: "8px" }}>{p.name}</p>
+                <p style={{ fontSize: "13px", color: "#777" }}>Rs. {p.price}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

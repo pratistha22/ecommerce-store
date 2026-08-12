@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }) {
+  const tagColors = {
+  New: "#4caf50",
+  Sale: "#e53e3e",
+  Trending: "#e75480",
+};
   const [added, setAdded] = useState(false);
 
   function handleClick() {
@@ -28,7 +33,24 @@ onMouseLeave={(e) => {
 }}
 >
       <Link to={`/product/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-  <img src={product.image} alt={product.name} style={{ width: "100%", borderRadius: "6px" }} />
+  <div style={{ position: "relative" }}>
+    <img src={product.image} alt={product.name} style={{ width: "100%", borderRadius: "6px" }} />
+    {product.tag && (
+      <span style={{
+        position: "absolute",
+        top: "8px",
+        left: "8px",
+        backgroundColor: tagColors[product.tag] || "#e75480",
+        color: "white",
+        fontSize: "11px",
+        fontWeight: "bold",
+        padding: "3px 8px",
+        borderRadius: "4px",
+      }}>
+        {product.tag}
+      </span>
+    )}
+  </div>
   <h3 style={{ fontSize: "16px", margin: "12px 0 4px" }}>{product.name}</h3>
 </Link>
       <p style={{ color: "#555", fontSize: "14px" }}>Rs. {product.price}</p>

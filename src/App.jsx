@@ -12,8 +12,9 @@ import Orders from "./pages/Orders";
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const [toast, setToast] = useState("");
 
-  function handleAddToCart(product) {
+ function handleAddToCart(product) {
   setCartItems((prev) => {
     const existing = prev.find((item) => item.id === product.id);
     if (existing) {
@@ -23,6 +24,12 @@ function App() {
     }
     return [...prev, { ...product, quantity: 1 }];
   });
+  showToast(product.name + " added to cart!");
+}
+
+function showToast(message) {
+  setToast(message);
+  setTimeout(() => setToast(""), 2000);
 }
   function handleRemoveFromCart(productId) {
   setCartItems(cartItems.filter((item) => item.id !== productId));
@@ -62,6 +69,22 @@ function handleToggleWishlist(product) {
         <Route path="/wishlist" element={<Wishlist wishlist={wishlist} onAddToCart={handleAddToCart} onToggleWishlist={handleToggleWishlist} />} />
         <Route path="/orders" element={<Orders />} />
       </Routes>
+      {toast && (
+  <div style={{
+    position: "fixed",
+    top: "20px",
+    right: "20px",
+    backgroundColor: "#e75480",
+    color: "white",
+    padding: "12px 20px",
+    borderRadius: "8px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    fontSize: "14px",
+    zIndex: 1000,
+  }}>
+    {toast}
+  </div>
+)}
       <Footer />
     </BrowserRouter>
   );
