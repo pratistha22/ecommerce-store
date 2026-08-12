@@ -16,7 +16,7 @@ function ProductDetail({ onAddToCart }) {
 
   return (
     <div style={{ padding: "32px", maxWidth: "900px", margin: "0 auto" }}>
-      <Link to="/" style={{ color: "#1f3864" }}>← Back to shop</Link>
+      <Link to="/" style={{ color: "#e75480" }}>← Back to shop</Link>
       <div style={{ display: "flex", gap: "40px", marginTop: "20px", flexWrap: "wrap" }}>
         <img
           src={product.image}
@@ -31,7 +31,7 @@ function ProductDetail({ onAddToCart }) {
             onClick={() => onAddToCart(product)}
             style={{
               marginTop: "20px",
-              backgroundColor: "#1f3864",
+              backgroundColor: "#e75480",
               color: "white",
               border: "none",
               padding: "12px 24px",

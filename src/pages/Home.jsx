@@ -11,7 +11,7 @@ function Home({ onAddToCart }) {
 
   return (
     <div style={{ padding: "32px", maxWidth: "1100px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "36px", color: "#1f3864", marginBottom: "8px" }}>Our Products</h1>
+      <h1 style={{ fontSize: "36px", color: "#e75480", marginBottom: "8px" }}>Our Products</h1>
       <p style={{ color: "#666", marginBottom: "24px" }}>Fresh styles, straight to your cart.</p>
       <input
         type="text"

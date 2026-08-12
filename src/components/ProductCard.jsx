@@ -35,7 +35,7 @@ onMouseLeave={(e) => {
       <button
   onClick={handleClick}
   style={{
-    backgroundColor: added ? "#2e7d32" : "#1f3864",
+    backgroundColor: added ? "#2e7d32" : "#e75480",
     color: "white",
     border: "none",
     padding: "8px 16px",

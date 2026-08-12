@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
+import Checkout from "./pages/Checkout";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -32,13 +33,18 @@ function handleUpdateQuantity(productId, newQuantity) {
     item.id === productId ? { ...item, quantity: newQuantity } : item
   ));
 }
+
+function handleOrderComplete() {
+  setCartItems([]);
+}
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)} />
       <Routes>
         <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
         <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} />
         <Route path="/cart" element={<Cart cartItems={cartItems} onRemove={handleRemoveFromCart} onUpdateQuantity={handleUpdateQuantity} />} />
+        <Route path="/checkout" element={<Checkout cartItems={cartItems} onOrderComplete={handleOrderComplete} />} />
       </Routes>
     </BrowserRouter>
   );

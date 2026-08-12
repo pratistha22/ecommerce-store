@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Cart({ cartItems, onRemove, onUpdateQuantity }) {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -55,6 +56,20 @@ function Cart({ cartItems, onRemove, onUpdateQuantity }) {
             </div>
           ))}
           <h3 style={{ marginTop: "20px" }}>Total: Rs. {total}</h3>
+          <Link to="/checkout">
+  <button style={{
+    marginTop: "16px",
+    backgroundColor: "#e75480",
+    color: "white",
+    border: "none",
+    padding: "12px 24px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontSize: "15px",
+  }}>
+    Proceed to Checkout
+  </button>
+</Link>
         </>
       )}
     </div>
