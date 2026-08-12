@@ -1,5 +1,5 @@
-function Cart({ cartItems, onRemove }) {
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+function Cart({ cartItems, onRemove, onUpdateQuantity }) {
+  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <div style={{ padding: "32px", maxWidth: "1100px", margin: "0 auto" }}>
@@ -8,19 +8,38 @@ function Cart({ cartItems, onRemove }) {
         <p>Your cart is empty.</p>
       ) : (
         <>
-          {cartItems.map((item, index) => (
-            <div key={index} style={{
+          {cartItems.map((item) => (
+            <div key={item.id} style={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
               borderBottom: "1px solid #eee",
               padding: "12px 0",
-              maxWidth: "400px",
+              maxWidth: "500px",
+              gap: "16px",
             }}>
-              <span>{item.name}</span>
-              <span>Rs. {item.price}</span>
+              <span style={{ flex: 1 }}>{item.name}</span>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <button
+                  onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                  style={{ padding: "2px 8px", cursor: "pointer" }}
+                >
+                  −
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                  onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                  style={{ padding: "2px 8px", cursor: "pointer" }}
+                >
+                  +
+                </button>
+              </div>
+
+              <span>Rs. {item.price * item.quantity}</span>
+
               <button
-                onClick={() => onRemove(index)}
+                onClick={() => onRemove(item.id)}
                 style={{
                   backgroundColor: "#e53e3e",
                   color: "white",

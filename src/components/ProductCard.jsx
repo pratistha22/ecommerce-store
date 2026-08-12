@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 function ProductCard({ product, onAddToCart }) {
   const [added, setAdded] = useState(false);
 
@@ -26,8 +27,10 @@ onMouseLeave={(e) => {
   e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.06)";
 }}
 >
-      <img src={product.image} alt={product.name} style={{ width: "100%", borderRadius: "6px" }} />
-      <h3 style={{ fontSize: "16px", margin: "12px 0 4px" }}>{product.name}</h3>
+      <Link to={`/product/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+  <img src={product.image} alt={product.name} style={{ width: "100%", borderRadius: "6px" }} />
+  <h3 style={{ fontSize: "16px", margin: "12px 0 4px" }}>{product.name}</h3>
+</Link>
       <p style={{ color: "#555", fontSize: "14px" }}>Rs. {product.price}</p>
       <button
   onClick={handleClick}
