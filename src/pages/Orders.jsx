@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Orders() {
+function Orders({ onLogout }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,23 @@ function Orders() {
 
   return (
     <div style={{ padding: "32px", maxWidth: "800px", margin: "0 auto" }}>
-      <h1 style={{ color: "#e75480" }}>Orders</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <h1 style={{ color: "#e75480" }}>Orders</h1>
+  <button
+    onClick={onLogout}
+    style={{
+      backgroundColor: "transparent",
+      color: "#e75480",
+      border: "1px solid #e75480",
+      padding: "8px 16px",
+      borderRadius: "6px",
+      cursor: "pointer",
+      fontSize: "14px",
+    }}
+  >
+    Logout
+  </button>
+</div>
       {orders.length === 0 ? (
         <p style={{ marginTop: "12px" }}>No orders yet.</p>
       ) : (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
@@ -8,11 +8,15 @@ import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
+import OwnerLogin from "./pages/OwnerLogin";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [toast, setToast] = useState("");
+  const [isOwnerLoggedIn, setIsOwnerLoggedIn] = useState(
+  sessionStorage.getItem("ownerLoggedIn") === "true"
+);
 
  function handleAddToCart(product) {
   setCartItems((prev) => {
@@ -48,6 +52,10 @@ function handleUpdateQuantity(productId, newQuantity) {
 function handleOrderComplete() {
   setCartItems([]);
 }
+function handleLogout() {
+  sessionStorage.removeItem("ownerLoggedIn");
+  setIsOwnerLoggedIn(false);
+}
 
 function handleToggleWishlist(product) {
   setWishlist((prev) => {
@@ -67,7 +75,21 @@ function handleToggleWishlist(product) {
         <Route path="/cart" element={<Cart cartItems={cartItems} onRemove={handleRemoveFromCart} onUpdateQuantity={handleUpdateQuantity} />} />
         <Route path="/checkout" element={<Checkout cartItems={cartItems} onOrderComplete={handleOrderComplete} />} />
         <Route path="/wishlist" element={<Wishlist wishlist={wishlist} onAddToCart={handleAddToCart} onToggleWishlist={handleToggleWishlist} />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route
+  path="/owner-login"
+  element={
+    <OwnerLogin
+      onLogin={() => {
+        sessionStorage.setItem("ownerLoggedIn", "true");
+        setIsOwnerLoggedIn(true);
+      }}
+    />
+  }
+/>
+        <Route
+  path="/orders"
+  element={isOwnerLoggedIn ? <Orders onLogout={handleLogout} /> : <Navigate to="/owner-login" replace />}
+/>
       </Routes>
       {toast && (
   <div style={{
