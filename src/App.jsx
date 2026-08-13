@@ -15,7 +15,7 @@ function App() {
   const [wishlist, setWishlist] = useState([]);
   const [toast, setToast] = useState("");
   const [isOwnerLoggedIn, setIsOwnerLoggedIn] = useState(
-  sessionStorage.getItem("ownerLoggedIn") === "true"
+  !!sessionStorage.getItem("ownerToken")
 );
 
  function handleAddToCart(product) {
@@ -53,7 +53,7 @@ function handleOrderComplete() {
   setCartItems([]);
 }
 function handleLogout() {
-  sessionStorage.removeItem("ownerLoggedIn");
+  sessionStorage.removeItem("ownerToken");
   setIsOwnerLoggedIn(false);
 }
 
@@ -68,7 +68,10 @@ function handleToggleWishlist(product) {
 }
   return (
     <BrowserRouter>
-      <Navbar cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)} />
+      <Navbar
+  cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+  isOwnerLoggedIn={isOwnerLoggedIn}
+/>
       <Routes>
         <Route path="/" element={<Home onAddToCart={handleAddToCart} wishlist={wishlist} onToggleWishlist={handleToggleWishlist} />} />
         <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} />
@@ -79,8 +82,8 @@ function handleToggleWishlist(product) {
   path="/owner-login"
   element={
     <OwnerLogin
-      onLogin={() => {
-        sessionStorage.setItem("ownerLoggedIn", "true");
+      onLogin={(token) => {
+        sessionStorage.setItem("ownerToken", token);
         setIsOwnerLoggedIn(true);
       }}
     />

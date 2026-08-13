@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Checkout({ cartItems, onOrderComplete }) {
   const [name, setName] = useState("");
@@ -10,24 +11,27 @@ function Checkout({ cartItems, onOrderComplete }) {
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
- function handlePlaceOrder(e) {
+ async function handlePlaceOrder(e) {
     e.preventDefault();
 
     const newOrder = {
-      id: Date.now(),
       name,
       address,
       phone,
       items: cartItems,
       total,
       date: new Date().toLocaleString(),
+      status: "Pending",
     };
 
-    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    localStorage.setItem("orders", JSON.stringify([...existingOrders, newOrder]));
-
-    setOrderPlaced(true);
-    onOrderComplete();
+    try {
+      await axios.post("https://ecommerce-backend-iwho.onrender.com/api/orders", newOrder);
+      setOrderPlaced(true);
+      onOrderComplete();
+    } catch (err) {
+      console.error("Failed to place order:", err);
+      alert("Something went wrong placing your order. Please try again.");
+    }
   }
 
   if (orderPlaced) {

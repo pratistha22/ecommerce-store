@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function OwnerLogin({ onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const correctPassword = "mystore123";
 
-    if (password === correctPassword) {
-      onLogin();
-      navigate("/orders");
-    } else {
+    try {
+      const res = await axios.post("https://ecommerce-backend-iwho.onrender.com/api/login", { password });
+      if (res.data.success) {
+        onLogin(res.data.token);
+        navigate("/orders");
+      }
+    } catch (err) {
       setError("Incorrect password.");
     }
   }

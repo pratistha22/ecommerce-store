@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar({ cartCount }) {
+function Navbar({ cartCount, isOwnerLoggedIn }) {
   return (
     <nav style={{
       display: "flex",
@@ -15,7 +15,11 @@ flexWrap: "wrap",
       <div style={{ display: "flex", gap: "24px" }}>
         <Link to="/" style={{ color: "white", textDecoration: "none" }}>Home</Link>
         <Link to="/wishlist" style={{ color: "white", textDecoration: "none" }}>Wishlist</Link>
-        <Link to="/orders" style={{ color: "white", textDecoration: "none" }}>Orders</Link>
+        {isOwnerLoggedIn ? (
+  <Link to="/orders" style={{ color: "white", textDecoration: "none" }}>Orders</Link>
+) : (
+  <Link to="/owner-login" style={{ color: "white", textDecoration: "none", fontSize: "12px", opacity: 0.7 }}>Owner Login</Link>
+)}
         <Link to="/cart" style={{ color: "white", textDecoration: "none", position: "relative" }}>
   Cart
   {cartCount > 0 && (
