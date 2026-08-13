@@ -6,6 +6,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
     description: "A stunning flowy red gown, perfect for special occasions.",
     tag: "New",
+    category: "Dresses",
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400",
     description: "A pretty red floral wrap dress with a flattering fit.",
     tag: "Sale",
+    category: "Dresses",
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?w=400",
     description: "A relaxed-fit graphic tee, easy to style with jeans.",
     tag: null,
+    category: "Tops",
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
     description: "An elegant structured handbag to complete any look.",
     tag: "Trending",
+    category: "Bags",
   },
 ];
 

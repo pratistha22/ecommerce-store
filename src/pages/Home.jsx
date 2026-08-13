@@ -5,9 +5,11 @@ import ProductCard from "../components/ProductCard";
 function Home({ onAddToCart, wishlist, onToggleWishlist }) {
   const [search, setSearch] = useState("");
 const [activeTag, setActiveTag] = useState("All");
+const [activeCategory, setActiveCategory] = useState("All");
 const [sortOrder, setSortOrder] = useState("none");
 
   const tags = ["All", ...new Set(products.map((p) => p.tag).filter(Boolean))];
+  const categories = ["All", ...new Set(products.map((p) => p.category).filter(Boolean))];
 
 let filteredProducts = products.filter((p) =>
   p.name.toLowerCase().includes(search.toLowerCase())
@@ -15,6 +17,9 @@ let filteredProducts = products.filter((p) =>
 
 if (activeTag !== "All") {
   filteredProducts = filteredProducts.filter((p) => p.tag === activeTag);
+}
+if (activeCategory !== "All") {
+  filteredProducts = filteredProducts.filter((p) => p.category === activeCategory);
 }
 
 if (sortOrder === "low-high") {
@@ -42,6 +47,25 @@ if (sortOrder === "low-high") {
           fontSize: "14px",
         }}
       />
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "12px" }}>
+  {categories.map((cat) => (
+    <button
+      key={cat}
+      onClick={() => setActiveCategory(cat)}
+      style={{
+        padding: "6px 14px",
+        borderRadius: "20px",
+        border: activeCategory === cat ? "1px solid #1f3864" : "1px solid #ddd",
+        backgroundColor: activeCategory === cat ? "#1f3864" : "white",
+        color: activeCategory === cat ? "white" : "#333",
+        cursor: "pointer",
+        fontSize: "13px",
+      }}
+    >
+      {cat}
+    </button>
+  ))}
+</div>
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center", marginBottom: "24px" }}>
   {tags.map((tag) => (
     <button
