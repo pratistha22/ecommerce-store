@@ -7,6 +7,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailure from "./pages/PaymentFailure";
+import CustomerSignup from "./pages/CustomerSignup";
+import CustomerLogin from "./pages/CustomerLogin";
 import Footer from "./components/Footer";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
@@ -18,6 +20,9 @@ function App() {
   const [toast, setToast] = useState("");
   const [isOwnerLoggedIn, setIsOwnerLoggedIn] = useState(
   !!sessionStorage.getItem("ownerToken")
+);
+const [customer, setCustomer] = useState(
+  JSON.parse(localStorage.getItem("customer")) || null
 );
 
  function handleAddToCart(product) {
@@ -58,6 +63,17 @@ function handleLogout() {
   sessionStorage.removeItem("ownerToken");
   setIsOwnerLoggedIn(false);
 }
+function handleCustomerLogin(token, customerData) {
+  localStorage.setItem("customerToken", token);
+  localStorage.setItem("customer", JSON.stringify(customerData));
+  setCustomer(customerData);
+}
+
+function handleCustomerLogout() {
+  localStorage.removeItem("customerToken");
+  localStorage.removeItem("customer");
+  setCustomer(null);
+}
 
 function handleToggleWishlist(product) {
   setWishlist((prev) => {
@@ -81,6 +97,8 @@ function handleToggleWishlist(product) {
         <Route path="/checkout" element={<Checkout cartItems={cartItems} onOrderComplete={handleOrderComplete} />} />
         <Route path="/payment-success" element={<PaymentSuccess onOrderComplete={handleOrderComplete} />} />
 <Route path="/payment-failure" element={<PaymentFailure />} />
+<Route path="/customer-signup" element={<CustomerSignup onLogin={handleCustomerLogin} />} />
+<Route path="/customer-login" element={<CustomerLogin onLogin={handleCustomerLogin} />} />
         <Route path="/wishlist" element={<Wishlist wishlist={wishlist} onAddToCart={handleAddToCart} onToggleWishlist={handleToggleWishlist} />} />
         <Route
   path="/owner-login"
