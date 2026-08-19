@@ -22,6 +22,7 @@ flexWrap: "wrap",
 )}
 {customer ? (
   <span style={{ color: "white", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
+    <Link to="/my-orders" style={{ color: "white", textDecoration: "none" }}>My Orders</Link>
     Hi, {customer.name}
     <button
       onClick={onCustomerLogout}

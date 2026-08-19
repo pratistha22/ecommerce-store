@@ -23,6 +23,7 @@ function Checkout({ cartItems, onOrderComplete, customer }) {
       total,
       date: new Date().toLocaleString(),
       status: "Pending",
+      customerEmail: customer?.email || null,
     };
     localStorage.setItem("pendingOrder", JSON.stringify(pendingOrder));
 

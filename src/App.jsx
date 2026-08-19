@@ -9,6 +9,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailure from "./pages/PaymentFailure";
 import CustomerSignup from "./pages/CustomerSignup";
 import CustomerLogin from "./pages/CustomerLogin";
+import MyOrders from "./pages/MyOrders";
 import Footer from "./components/Footer";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
@@ -101,6 +102,7 @@ function handleToggleWishlist(product) {
 <Route path="/payment-failure" element={<PaymentFailure />} />
 <Route path="/customer-signup" element={<CustomerSignup onLogin={handleCustomerLogin} />} />
 <Route path="/customer-login" element={<CustomerLogin onLogin={handleCustomerLogin} />} />
+<Route path="/my-orders" element={<MyOrders customer={customer} />} />
         <Route path="/wishlist" element={<Wishlist wishlist={wishlist} onAddToCart={handleAddToCart} onToggleWishlist={handleToggleWishlist} />} />
         <Route
   path="/owner-login"
