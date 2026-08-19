@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar({ cartCount, isOwnerLoggedIn }) {
+function Navbar({ cartCount, isOwnerLoggedIn, customer, onCustomerLogout }) {
   return (
     <nav style={{
       display: "flex",
@@ -19,6 +19,27 @@ flexWrap: "wrap",
   <Link to="/orders" style={{ color: "white", textDecoration: "none" }}>Orders</Link>
 ) : (
   <Link to="/owner-login" style={{ color: "white", textDecoration: "none", fontSize: "12px", opacity: 0.7 }}>Owner Login</Link>
+)}
+{customer ? (
+  <span style={{ color: "white", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
+    Hi, {customer.name}
+    <button
+      onClick={onCustomerLogout}
+      style={{
+        background: "transparent",
+        border: "1px solid white",
+        color: "white",
+        padding: "4px 10px",
+        borderRadius: "6px",
+        cursor: "pointer",
+        fontSize: "12px",
+      }}
+    >
+      Logout
+    </button>
+  </span>
+) : (
+  <Link to="/customer-login" style={{ color: "white", textDecoration: "none" }}>Login</Link>
 )}
         <Link to="/cart" style={{ color: "white", textDecoration: "none", position: "relative" }}>
   Cart

@@ -89,6 +89,8 @@ function handleToggleWishlist(product) {
       <Navbar
   cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
   isOwnerLoggedIn={isOwnerLoggedIn}
+  customer={customer}
+  onCustomerLogout={handleCustomerLogout}
 />
       <Routes>
         <Route path="/" element={<Home onAddToCart={handleAddToCart} wishlist={wishlist} onToggleWishlist={handleToggleWishlist} />} />
