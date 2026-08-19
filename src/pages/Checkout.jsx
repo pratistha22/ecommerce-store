@@ -6,15 +6,16 @@ function Checkout({ cartItems, onOrderComplete }) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [orderPlaced, setOrderPlaced] = useState(false);
   const navigate = useNavigate();
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
- async function handlePlaceOrder(e) {
+  async function handlePlaceOrder(e) {
     e.preventDefault();
 
-    const newOrder = {
+    const transactionId = "txn_" + Date.now();
+
+    const pendingOrder = {
       name,
       address,
       phone,
@@ -23,38 +24,34 @@ function Checkout({ cartItems, onOrderComplete }) {
       date: new Date().toLocaleString(),
       status: "Pending",
     };
+    localStorage.setItem("pendingOrder", JSON.stringify(pendingOrder));
 
     try {
-      await axios.post("https://ecommerce-backend-iwho.onrender.com/api/orders", newOrder);
-      setOrderPlaced(true);
-      onOrderComplete();
-    } catch (err) {
-      console.error("Failed to place order:", err);
-      alert("Something went wrong placing your order. Please try again.");
-    }
-  }
+      const res = await axios.post("https://ecommerce-backend-iwho.onrender.com/api/esewa/initiate", {
+        amount: total,
+        transactionId,
+      });
 
-  if (orderPlaced) {
-    return (
-      <div style={{ padding: "32px", textAlign: "center" }}>
-        <h1 style={{ color: "#e75480" }}>🎉 Order Placed!</h1>
-        <p style={{ marginTop: "12px" }}>Thank you, {name}! Your order is on its way.</p>
-        <button
-          onClick={() => navigate("/")}
-          style={{
-            marginTop: "20px",
-            backgroundColor: "#e75480",
-            color: "white",
-            border: "none",
-            padding: "10px 20px",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
-        >
-          Back to Shop
-        </button>
-      </div>
-    );
+      const paymentData = res.data;
+
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+
+      Object.keys(paymentData).forEach((key) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = paymentData[key];
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+    } catch (err) {
+      console.error("Failed to initiate payment:", err);
+      alert("Something went wrong starting payment. Please try again.");
+    }
   }
 
   return (
@@ -99,7 +96,7 @@ function Checkout({ cartItems, onOrderComplete }) {
             fontSize: "15px",
           }}
         >
-          Place Order
+          Pay with eSewa
         </button>
       </form>
     </div>

@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
 import Checkout from "./pages/Checkout";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentFailure from "./pages/PaymentFailure";
 import Footer from "./components/Footer";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
@@ -77,6 +79,8 @@ function handleToggleWishlist(product) {
         <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} />
         <Route path="/cart" element={<Cart cartItems={cartItems} onRemove={handleRemoveFromCart} onUpdateQuantity={handleUpdateQuantity} />} />
         <Route path="/checkout" element={<Checkout cartItems={cartItems} onOrderComplete={handleOrderComplete} />} />
+        <Route path="/payment-success" element={<PaymentSuccess onOrderComplete={handleOrderComplete} />} />
+<Route path="/payment-failure" element={<PaymentFailure />} />
         <Route path="/wishlist" element={<Wishlist wishlist={wishlist} onAddToCart={handleAddToCart} onToggleWishlist={handleToggleWishlist} />} />
         <Route
   path="/owner-login"
