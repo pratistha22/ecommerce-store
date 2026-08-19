@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Checkout({ cartItems, onOrderComplete }) {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+function Checkout({ cartItems, onOrderComplete, customer }) {
+  const [name, setName] = useState(customer?.name || "");
+  const [address, setAddress] = useState(customer?.address || "");
+  const [phone, setPhone] = useState(customer?.phone || "");
   const navigate = useNavigate();
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
