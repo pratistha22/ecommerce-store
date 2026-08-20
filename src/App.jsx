@@ -95,7 +95,7 @@ function handleToggleWishlist(product) {
 />
       <Routes>
         <Route path="/" element={<Home onAddToCart={handleAddToCart} wishlist={wishlist} onToggleWishlist={handleToggleWishlist} />} />
-        <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} />
+        <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} customer={customer} />} />
         <Route path="/cart" element={<Cart cartItems={cartItems} onRemove={handleRemoveFromCart} onUpdateQuantity={handleUpdateQuantity} />} />
         <Route path="/checkout" element={<Checkout cartItems={cartItems} onOrderComplete={handleOrderComplete} customer={customer} />} />
         <Route path="/payment-success" element={<PaymentSuccess onOrderComplete={handleOrderComplete} />} />
