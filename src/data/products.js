@@ -3,7 +3,7 @@ const products = [
     id: 1,
     name: "Red Flowy Evening Gown",
     price: 1299,
-    image: "https://placehold.co/400x400/e75480/ffffff?text=Red+Evening+Gown",
+    image: "https://images.unsplash.com/photo-1583039949165-96ee24b0d8de?w=400",
     description: "A stunning flowy red gown, perfect for special occasions.",
     tag: "New",
     category: "Dresses",
