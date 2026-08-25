@@ -12,7 +12,7 @@ const products = [
     id: 2,
     name: "Red Floral Wrap Dress",
     price: 1599,
-    image: "https://placehold.co/400x400/e75480/ffffff?text=Floral+Wrap+Dress",
+    image: "https://images.unsplash.com/photo-1602010069450-0a62034f235c?w=400",
     description: "A pretty red floral wrap dress with a flattering fit.",
     tag: "Sale",
     category: "Dresses",
