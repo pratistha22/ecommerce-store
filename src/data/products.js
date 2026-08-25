@@ -21,7 +21,7 @@ const products = [
     id: 3,
     name: "Pink Graphic Tee",
     price: 899,
-    image: "https://placehold.co/400x400/f8c8dc/6b3d4f?text=Pink+Graphic+Tee",
+    image: "https://images.unsplash.com/photo-1578848427868-a1b7c2653eb4?w=400",
     description: "A soft, relaxed-fit pink graphic tee.",
     tag: null,
     category: "Tops",
