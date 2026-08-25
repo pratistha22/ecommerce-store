@@ -30,7 +30,7 @@ const products = [
     id: 4,
     name: "Structured Top-Handle Bag",
     price: 1499,
-    image: "https://placehold.co/400x400/e75480/ffffff?text=Handbag",
+    image: "https://images.unsplash.com/photo-1641943093217-4a40b4e92a50?w=400",
     description: "An elegant structured handbag to complete any look.",
     tag: "Trending",
     category: "Bags",
